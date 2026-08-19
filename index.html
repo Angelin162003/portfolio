@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Angelin Augustina A — Java &amp; Spring Boot Developer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#0a0a0a;
+  --panel:#141414;
+  --panel-2:#1c1c1c;
+  --border:#2b2b2b;
+  --text:#f5f5f5;
+  --text-dim:#9a9fa6;
+  --accent:#f5b428;
+  --accent-soft:#f5b42822;
+  --green:#3fd67a;
+  --radius:18px;
+  --display:'Poppins', sans-serif;
+  --body:'Inter', sans-serif;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,.055) 1px, transparent 1px) 0 0/26px 26px,
+    var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  line-height:1.65;
+}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important;} }
+
+a{color:inherit; text-decoration:none;}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+.wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+img{max-width:100%; display:block;}
+
+/* ---------- nav ---------- */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(10,10,10,.75);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(10px);
+}
+.topbar-inner{max-width:1180px; margin:0 auto; padding:0 32px; height:76px; display:flex; align-items:center; justify-content:space-between;}
+.logo{font-family:var(--display); font-weight:700; font-size:20px;}
+.logo span{color:var(--accent);}
+nav{display:flex; align-items:center; gap:30px;}
+.navlink{font-size:14px; color:var(--text-dim); font-weight:500; transition:color .2s ease;}
+.navlink b{color:var(--accent); font-weight:600; margin-right:2px;}
+.navlink:hover{color:var(--text);}
+.contact-pill{
+  background:#fff; color:#0a0a0a; font-weight:600; font-size:14px;
+  padding:10px 22px; border-radius:10px; transition:transform .15s ease, background .2s ease;
+}
+.contact-pill:hover{transform:translateY(-2px); background:var(--accent);}
+.menu-btn{display:none; background:none; border:1px solid var(--border); border-radius:8px; width:40px; height:40px; color:var(--text); cursor:pointer; font-size:18px;}
+@media (max-width:980px){
+  nav{display:none; position:absolute; top:76px; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:#0a0a0a; border-bottom:1px solid var(--border); padding:8px 0;}
+  nav.open{display:flex;}
+  nav .navlink{padding:14px 32px; width:100%; border-bottom:1px solid var(--border);}
+  nav .contact-pill{margin:14px 32px;}
+  .menu-btn{display:flex; align-items:center; justify-content:center;}
+}
+
+/* ---------- hero ---------- */
+.hero{padding:88px 0 100px;}
+.hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center;}
+@media (max-width:980px){ .hero-grid{grid-template-columns:1fr; gap:48px;} }
+
+.hi-line{font-family:var(--display); font-weight:700; font-size:clamp(34px,5.2vw,58px); line-height:1.08; letter-spacing:-0.01em; margin-bottom:20px;}
+.hi-line .accent{color:var(--accent);}
+.role-line{font-family:var(--display); font-weight:600; font-size:clamp(18px,2.4vw,26px); color:var(--text); margin-bottom:22px;}
+.role-line span{color:var(--text-dim); margin:0 10px; font-weight:400;}
+.loc{display:flex; align-items:center; gap:8px; color:var(--text-dim); font-size:14.5px; margin-bottom:22px;}
+.hero-desc{color:var(--text-dim); font-size:16px; max-width:520px; margin-bottom:34px;}
+
+.btn-row{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:34px;}
+.btn{
+  font-family:var(--body); font-weight:600; font-size:14.5px;
+  padding:14px 26px; border-radius:12px;
+  display:inline-flex; align-items:center; gap:9px; cursor:pointer;
+  transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  border:1px solid var(--border);
+}
+.btn-dark{background:#000; color:#fff; border-color:#333;}
+.btn-dark:hover{transform:translateY(-2px); border-color:var(--accent);}
+.btn-outline{background:transparent; color:var(--text); border-color:#3a3a3a;}
+.btn-outline:hover{transform:translateY(-2px); border-color:var(--accent); color:var(--accent);}
+
+.social-row{display:flex; gap:14px;}
+.social-icon{
+  width:42px; height:42px; border-radius:50%; border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center; color:var(--text-dim);
+  transition:all .2s ease;
+}
+.social-icon:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px);}
+
+.photo-wrap{position:relative; justify-self:center;}
+.photo-frame{
+  width:min(380px, 100%); aspect-ratio:4/5; border-radius:24px;
+  border:4px solid var(--accent); overflow:hidden;
+  box-shadow:0 30px 70px -25px rgba(245,180,40,.25);
+}
+.photo-frame img{width:100%; height:100%; object-fit:cover;}
+.work-badge{
+  position:absolute; bottom:18px; right:18px;
+  background:rgba(10,10,10,.85); border:1px solid var(--border); backdrop-filter:blur(6px);
+  padding:8px 14px; border-radius:999px; display:flex; align-items:center; gap:8px;
+  font-size:12.5px; font-weight:600;
+}
+.work-badge i{width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:pulse 1.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.4;}}
+
+/* ---------- sections ---------- */
+section{padding:90px 0;}
+.section-eyebrow{font-family:var(--display); font-weight:600; font-size:13px; color:var(--accent); letter-spacing:.08em; margin-bottom:10px; text-transform:uppercase;}
+.section-title{font-family:var(--display); font-weight:700; font-size:clamp(26px,3.6vw,36px); letter-spacing:-0.01em; margin-bottom:40px;}
+.divider{height:1px; background:var(--border); border:none;}
+
+.reveal{opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+
+/* about */
+.about-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:48px;}
+@media (max-width:900px){ .about-grid{grid-template-columns:1fr;} }
+.about-text p{color:var(--text-dim); font-size:16px; margin-bottom:16px;}
+.about-text strong{color:var(--text);}
+.stat-card{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:26px;}
+.stat-card .head{font-family:var(--display); font-weight:600; font-size:14px; color:var(--accent); margin-bottom:16px;}
+.stat-row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:14px;}
+.stat-row:last-child{border-bottom:none;}
+.stat-row span:first-child{color:var(--text-dim);}
+.stat-row span:last-child{font-weight:600;}
+
+/* skills */
+.skills-grid{display:flex; flex-wrap:wrap; gap:12px;}
+.skill-chip{
+  font-size:14px; font-weight:500; color:var(--text);
+  border:1px solid var(--border); background:var(--panel);
+  padding:11px 18px; border-radius:12px;
+  transition:all .2s ease;
+}
+.skill-chip:hover{border-color:var(--accent); background:var(--accent-soft); transform:translateY(-2px);}
+
+/* projects */
+.project-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+@media (max-width:900px){ .project-grid{grid-template-columns:1fr;} }
+.project-card{
+  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+  padding:28px; display:flex; flex-direction:column;
+  transition:all .25s ease;
+}
+.project-card:hover{border-color:var(--accent); transform:translateY(-4px);}
+.pc-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;}
+.pc-title{font-family:var(--display); font-weight:600; font-size:19px;}
+.pc-date{font-size:12px; color:var(--accent); font-weight:600; border:1px solid var(--accent-soft); background:var(--accent-soft); padding:4px 10px; border-radius:8px; white-space:nowrap;}
+.pc-subtitle{color:var(--text-dim); font-size:13.5px; margin-bottom:14px;}
+.pc-desc{color:var(--text-dim); font-size:14.5px; margin-bottom:16px;}
+.pc-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; margin-top:auto;}
+.pc-tag{font-size:12px; color:var(--accent); background:var(--accent-soft); padding:5px 11px; border-radius:7px; font-weight:500;}
+.pc-link{
+  font-size:13.5px; font-weight:600; padding:10px 16px; border-radius:10px;
+  border:1px solid var(--border); color:var(--text); align-self:flex-start;
+  display:inline-flex; align-items:center; gap:7px; transition:all .2s ease;
+}
+.pc-link:hover{border-color:var(--accent); color:var(--accent);}
+
+/* education */
+.edu-card{
+  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+  padding:28px 30px; display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;
+}
+.edu-degree{font-family:var(--display); font-weight:600; font-size:19px; margin-bottom:6px;}
+.edu-school{color:var(--text-dim); font-size:14.5px;}
+.edu-period{font-weight:600; color:var(--accent); font-size:13.5px; white-space:nowrap;}
+
+/* contact */
+.contact-panel{
+  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+  padding:44px; display:grid; grid-template-columns:1fr 1fr; gap:44px;
+}
+@media (max-width:900px){ .contact-panel{grid-template-columns:1fr; padding:30px;} }
+.contact-info p{color:var(--text-dim); font-size:15px; margin-bottom:22px;}
+.contact-links{display:flex; flex-direction:column; gap:14px;}
+.contact-links a{
+  font-size:14.5px; display:flex; align-items:center; gap:12px;
+  padding:12px 0; border-bottom:1px solid var(--border);
+  transition:all .2s ease;
+}
+.contact-links a:hover{color:var(--accent); padding-left:6px;}
+form{display:flex; flex-direction:column; gap:16px;}
+label{font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em; font-weight:600;}
+input, textarea{
+  width:100%; background:var(--panel-2); border:1px solid var(--border); border-radius:10px;
+  padding:13px 14px; color:var(--text); font-family:var(--body); font-size:14.5px;
+  transition:border-color .2s ease;
+}
+input:focus, textarea:focus{border-color:var(--accent); outline:none;}
+textarea{resize:vertical; min-height:100px;}
+.field{display:flex; flex-direction:column; gap:7px;}
+.form-status{font-size:13px; color:var(--accent); min-height:16px;}
+
+footer{border-top:1px solid var(--border); padding:36px 0; text-align:center;}
+footer p{font-size:13px; color:var(--text-dim);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">Portfolio<span>.</span></div>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+    <nav id="navMenu">
+      <a class="navlink" href="#about"><b>01</b>About</a>
+      <a class="navlink" href="#skills"><b>02</b>Skills</a>
+      <a class="navlink" href="#projects"><b>03</b>Projects</a>
+      <a class="navlink" href="#education"><b>04</b>Education</a>
+      <a class="contact-pill" href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <h1 class="hi-line">Hi, I'm <span class="accent">Angelin Augustina A</span></h1>
+      <div class="role-line">Java Developer <span>|</span> Spring Boot Engineer <span>|</span> AI Enthusiast</div>
+      <div class="loc">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Sathyamangalam, Tamil Nadu, India
+      </div>
+      <p class="hero-desc">Fresher Computer Science graduate (B.Tech, AI &amp; Data Science) building backend applications with Java, Spring Boot, and RESTful APIs — including an AI-powered RAG application using OpenAI embeddings and Pinecone.</p>
+      <div class="btn-row">
+        <a class="btn btn-dark" href="#contact">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          Get In Touch
+        </a>
+        <a class="btn btn-outline" href="Angelin_Augustina_Tech_Resume.pdf" download>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          View Resume
+        </a>
+      </div>
+      <div class="social-row">
+        <a class="social-icon" href="https://github.com/angelin-augustina" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+        </a>
+        <a class="social-icon" href="https://linkedin.com/in/angelin-augustina-1a65bb262" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.02 2 2 0 0 1 4 .02zM7 8.48H3V21h4V8.48zM13.5 8.48h-3.83V21h3.83v-6.36c0-1.7.32-3.34 2.43-3.34 2.08 0 2.1 1.94 2.1 3.44V21H22v-7.02c0-3.6-.78-6.37-4.98-6.37-2.02 0-3.37 1.1-3.93 2.15h-.05V8.48z"/></svg>
+        </a>
+        <a class="social-icon" href="mailto:angelinaugustina16@gmail.com" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="photo-wrap reveal in">
+      <div class="photo-frame">
+        <img src="profile.jpg" alt="Angelin Augustina A" />
+      </div>
+      <div class="work-badge"><i></i>Open to work</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="about">
+    <div class="wrap">
+      <span class="section-eyebrow reveal">About</span>
+      <h2 class="section-title reveal">A little about me</h2>
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <p>I'm a fresher Computer Science graduate (<strong>B.Tech, AI &amp; Data Science</strong>) with hands-on experience building backend applications using <strong>Java, Spring Boot, and RESTful APIs</strong> across four independent projects — including an AI-powered RAG application using OpenAI embeddings and Pinecone.</p>
+          <p>I have a strong foundation in <strong>database design (MySQL)</strong>, API development, and secure authentication. I'm a quick learner with a track record of independently designing, building, and deploying full-stack solutions end to end.</p>
+          <p>Currently looking for opportunities as a <strong>Backend / AI Engineer</strong> where I can grow both sides of that skill set.</p>
+        </div>
+        <div class="stat-card">
+          <div class="head">Quick facts</div>
+          <div class="stat-row"><span>Focus</span><span>Backend + AI</span></div>
+          <div class="stat-row"><span>Core stack</span><span>Java · Spring Boot</span></div>
+          <div class="stat-row"><span>Database</span><span>MySQL</span></div>
+          <div class="stat-row"><span>AI tooling</span><span>RAG · OpenAI · Pinecone</span></div>
+          <div class="stat-row"><span>Location</span><span>Sathyamangalam, TN</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="skills">
+    <div class="wrap">
+      <span class="section-eyebrow reveal">Skills</span>
+      <h2 class="section-title reveal">Technologies I work with</h2>
+      <div class="skills-grid reveal">
+        <span class="skill-chip">Java</span>
+        <span class="skill-chip">Spring Boot</span>
+        <span class="skill-chip">JavaScript</span>
+        <span class="skill-chip">HTML/CSS</span>
+        <span class="skill-chip">SQL</span>
+        <span class="skill-chip">MySQL</span>
+        <span class="skill-chip">REST APIs</span>
+        <span class="skill-chip">Microservices</span>
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">RAG</span>
+        <span class="skill-chip">OpenAI Embeddings</span>
+        <span class="skill-chip">Pinecone</span>
+        <span class="skill-chip">Git / GitHub</span>
+        <span class="skill-chip">Postman</span>
+        <span class="skill-chip">IntelliJ IDEA</span>
+        <span class="skill-chip">VS Code</span>
+        <span class="skill-chip">Eclipse</span>
+        <span class="skill-chip">Splunk</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="projects">
+    <div class="wrap">
+      <span class="section-eyebrow reveal">Projects</span>
+      <h2 class="section-title reveal">Selected work</h2>
+      <div class="project-grid reveal">
+
+        <article class="project-card">
+          <div class="pc-top">
+            <div class="pc-title">CampusAI</div>
+            <span class="pc-date">Nov 2025</span>
+          </div>
+          <div class="pc-subtitle">AI-Powered Study Assistant</div>
+          <p class="pc-desc">A Spring Boot backend where students upload PDF lecture notes and get AI-generated answers, summaries, and quizzes — grounded strictly in the uploaded material using RAG with OpenAI embeddings and Pinecone vector search.</p>
+          <div class="pc-tags">
+            <span class="pc-tag">Java</span><span class="pc-tag">Spring Boot</span><span class="pc-tag">RAG</span><span class="pc-tag">OpenAI</span><span class="pc-tag">Pinecone</span>
+          </div>
+          <a class="pc-link" href="#contact">View details →</a>
+        </article>
+
+        <article class="project-card">
+          <div class="pc-top">
+            <div class="pc-title">Real-Time Pulmonary Monitoring System</div>
+            <span class="pc-date">Mar 2026</span>
+          </div>
+          <div class="pc-subtitle">IoT + ML Health Monitoring</div>
+          <p class="pc-desc">An IoT-integrated system tracking respiratory conditions such as asthma, COPD, and pneumonia using ML models trained on patient vitals, with real-time alerting for early emergency detection.</p>
+          <div class="pc-tags">
+            <span class="pc-tag">Python</span><span class="pc-tag">IoT</span><span class="pc-tag">Machine Learning</span>
+          </div>
+          <a class="pc-link" href="https://github.com/angelin-augustina/Health-Monitor-pulmonary-monitoring-sys-" target="_blank" rel="noopener">GitHub ↗</a>
+        </article>
+
+        <article class="project-card">
+          <div class="pc-top">
+            <div class="pc-title">Visitors Database Management System</div>
+            <span class="pc-date">Jul 2025</span>
+          </div>
+          <div class="pc-subtitle">Access &amp; Records Management</div>
+          <p class="pc-desc">A full-stack visitor management application with secure authentication and role-based access, backed by a MySQL schema for visitor data storage, retrieval, and automated report generation.</p>
+          <div class="pc-tags">
+            <span class="pc-tag">Java</span><span class="pc-tag">Spring Boot</span><span class="pc-tag">MySQL</span>
+          </div>
+          <a class="pc-link" href="#contact">View details →</a>
+        </article>
+
+        <article class="project-card">
+          <div class="pc-top">
+            <div class="pc-title">Medi Remind</div>
+            <span class="pc-date">Aug 2024</span>
+          </div>
+          <div class="pc-subtitle">Medication Reminder System</div>
+          <p class="pc-desc">A full-stack web app that automates SMS medication reminders based on user-defined schedules, with user registration, scheduling automation, and a responsive interface built end to end.</p>
+          <div class="pc-tags">
+            <span class="pc-tag">Java</span><span class="pc-tag">Spring Boot</span><span class="pc-tag">MySQL</span><span class="pc-tag">HTML/CSS</span>
+          </div>
+          <a class="pc-link" href="#contact">View details →</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="education">
+    <div class="wrap">
+      <span class="section-eyebrow reveal">Education</span>
+      <h2 class="section-title reveal">Academic background</h2>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-degree">B.Tech, Artificial Intelligence &amp; Data Science</div>
+          <div class="edu-school">KGiSL Institute of Technology, Coimbatore · CGPA 7.3 / 10</div>
+        </div>
+        <div class="edu-period">Nov 2022 — Mar 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="contact">
+    <div class="wrap">
+      <span class="section-eyebrow reveal">Contact</span>
+      <h2 class="section-title reveal">Let's build something</h2>
+      <div class="contact-panel reveal">
+        <div class="contact-info">
+          <p>Open to backend and AI engineering roles. The fastest way to reach me is email or LinkedIn — happy to talk about any of the projects above in more depth.</p>
+          <div class="contact-links">
+            <a href="mailto:angelinaugustina16@gmail.com">✉ angelinaugustina16@gmail.com</a>
+            <a href="tel:+917339390245">☎ +91 73393 90245</a>
+            <a href="https://github.com/angelin-augustina" target="_blank" rel="noopener">⌥ github.com/angelin-augustina</a>
+            <a href="https://linkedin.com/in/angelin-augustina-1a65bb262" target="_blank" rel="noopener">in linkedin.com/in/angelin-augustina-1a65bb262</a>
+          </div>
+        </div>
+        <form id="contactForm">
+          <div class="field">
+            <label for="cname">Name</label>
+            <input id="cname" type="text" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="cemail">Email</label>
+            <input id="cemail" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field">
+            <label for="cmsg">Message</label>
+            <textarea id="cmsg" placeholder="What are you building?" required></textarea>
+          </div>
+          <button class="btn btn-dark" type="submit" style="justify-content:center;">Send message</button>
+          <div class="form-status" id="formStatus"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Angelin Augustina A — built with care.</p>
+</footer>
+
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const navMenu = document.getElementById('navMenu');
+menuBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('open')));
+
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formStatus').textContent = 'Message captured — connect this form to an email service (e.g. Formspree) to send for real.';
+  this.reset();
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
